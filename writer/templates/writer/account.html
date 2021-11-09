@@ -76,7 +76,7 @@
                         <img src="{{post.imageUrl}}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title"><strong>{{post.title}}</strong></h5>
-                          <p class="card-text">{{post.body|truncatechars:'100'}}</p>
+                          <p class="card-text">{{post.body|safe|truncatechars:'100'}}</p>
                           <a href="{% url 'edit' post.slug %}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                           <a href="{% url 'delete' post.slug %}" class="btn btn-primary"><i class="fas fa-trash"></i></a>
                          
