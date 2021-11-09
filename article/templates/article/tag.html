@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<br><br>
+<div class = "container" >
+    <div class = 'row'>
+       
+        <div class = 'col-12' style = 'display: flex; align-items: center; justify-content: space-around; width: auto' >
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z"/>
+              </svg>
+            <h3 style = 'margin-left: 20px'> <strong>{{tag.title}}</strong>  </h3>
+        </div>
+        
+    </div>
+    <!-- <div class = 'row'>
+        <h3> </h3>
+    </div> -->
+    <br><br>
+    <div class = 'row' >
+        {% for post in tag.post_set.all %}
+        <div class="col-lg-4 mb-5">
+            <a href = "{% url 'detail' post.slug %}" style = 'text-decoration: none'>
+            <div class="card h-100 shadow border-0">
+                <img class="card-img-top" style = 'width: 100%; height: 100%' src="{{post.imageUrl}}" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+                <div class="card-body p-4">
+                    <div class="badge bg-primary bg-gradient rounded-pill mb-2"> {{post.tag.title}} </div>
+                    <a class="text-decoration-none link-dark stretched-link" href="{% url 'detail' post.slug %}"><h5 class="card-title mb-3"><strong>{{post.title}}</strong></h5></a>
+                    <p class="card-text mb-0">{{post.body|safe|truncatechars:'150'}}</p>
+                </div>
+                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                    <div class="d-flex align-items-end justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img class="rounded-circle me-3" src = "{{post.writer.pictureUrl}} " alt="..." style = " width: 20%; height: 20%"  />
+                            <div class="big">
+                                <div class="fw-bold">{{post.writer.name}}</div>
+                                <div class="text-muted">{{post.created}} &middot; 6 min read</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

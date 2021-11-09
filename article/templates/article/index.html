@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .active{
+        background-color: blue;
+        color: white;
+    }
+    .btn-custom{
+        border-radius: 20px;
+        height: 40px;
+        width: auto;
+        border: 2px solid lightgray;
+        color: grey;
+    }
+    .btn-custom:hover{
+        background-color: lightgray;
+        color: black;
+    }
+</style>
+
+
+<header class="bg-dark py-5">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <!-- <h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5 template for modern businesses</h1> -->
+                    <h1 class="display-5 fw-bolder text-white mb-2">A Platform designed for modern content creators</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Quickly write and customize compelling and mind blowing articles on Freelance writing, the world’s most popular content creating toolkit!</p>
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
+                        <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src=" img/happy2.jpg " alt="..." /></div>
+        </div>
+    </div>
+</header>
+
+ 
+
+  <!-- Blog preview section-->
+  <section class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6">
+                <div class="text-center">
+                    <h2 class="fw-bolder">Top Articles For You</h2>
+                    <p class="lead fw-normal text-muted mb-5">Here are articles from our topmost creators. Browse through to find the article you love most.</p>
+                </div>
+            </div>
+        </div>
+        <div class = 'container' style = 'display: flex; justify-content: center'>
+            {% for tag in tags %}
+            <a href  = " {% url 'tag' tag.slug %} ">
+            <button type="button" class="btn btn-custom" style = 'margin-right: 10px;'>{{tag.title}}</button>
+            {% endfor %}
+        </div>
+        <br>
+        <div class="row gx-5">
+            {% for post in posts %}
+            <div class="col-lg-4 mb-5">
+                <a href = "{% url 'detail' post.slug %}" style = 'text-decoration: none'>
+                <div class="card h-100 shadow border-0">
+                    <img class="card-img-top" style = 'width: 100%; height: 100%' src="{{post.imageUrl}}" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2"> {{post.tag.title}} </div>
+                        <a class="text-decoration-none link-dark stretched-link" href="{% url 'detail' post.slug %}"><h5 class="card-title mb-3"><strong>{{post.title}}</strong></h5></a>
+                        <p class="card-text mb-0">{{post.body|safe|truncatechars:'150'}}</p>
+                    </div>
+                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                        <div class="d-flex align-items-end justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle me-3" src = "{{post.writer.pictureUrl}} " alt="..." style = " width: 20%; height: 20%"  />
+                                <div class="big">
+                                    <div class="fw-bold">{{post.writer.name}}</div>
+                                    <!-- <div class="text-muted">{{post.created}} &middot; 6 min read</div> -->
+                                    <div class="text-muted">{{post.created}} &middot; 6 min read</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            </div>
+            {% endfor %}
+           
+
+
+            <nav aria-label="Page navigation example" style = 'align-self: center'>
+                <ul class="pagination" style = 'justify-content:center'>
+
+                    {% if posts.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{posts.previous_page_number}}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  {% endif %}
+
+                  {% for page in paginator.page_range %}
+                  {% if page == posts.number %}
+                  <li class="page-item"><a class="page-link active" href="?page={{page}}"> {{page}} </a></li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{page}}"> {{page}} </a></li>
+                  {% endif %}
+                  {% endfor %}
+                  {% if posts.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{posts.next_page_number}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{paginator.num_pages}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            
+        <!-- Call to action-->
+        <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
+            <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
+                <div class="mb-4 mb-xl-0">
+                    <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
+                    <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
+                </div>
+                <div class="ms-xl-4">
+                    <div class="input-group mb-2">
+                        <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
+                        <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
+                    </div>
+                    <div class="small text-white-50">We care about privacy, and will never share your data.</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+
+{% endblock %}
