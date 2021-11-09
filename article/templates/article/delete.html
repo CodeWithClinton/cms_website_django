@@ -2,7 +2,11 @@
 
 {% block content %}
 <style>
-   
+
+    
+    #cke_id_body{
+        width: 100% !important;
+      }
     #container{
         width: 50%;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -23,14 +27,10 @@
 <h3><strong>Delete Article</strong></h3>
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-{% for field in form %}
-    <div class="form mb-3">
-        <label for="floatingInput"><strong>{{field.label}}</strong></label>
-        {{field}}
-        
-      </div>
+{{form.media}}
+       {{form.as_p}}
       <!-- <br> -->
-      {% endfor %}
+      
       
       <!-- <div class="form-floating">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
