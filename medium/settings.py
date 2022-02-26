@@ -23,7 +23,7 @@ SECRET_KEY = 'django-insecure-k4sb5*&af8s&v8z5j@@xmb=!*g1g$hkb6+(u1@t$(b=%vm9*k*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -73,15 +73,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'medium.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# # Database
+# # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -142,9 +142,9 @@ IMAGE_ROOT = BASE_DIR/'static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# AWS_QUERYSTRING_AUTH = False
-# AWS_S3_FILE_OVERWRITE = False
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_ACCESS_KEY_ID  = os.environ.get('AWS_ACCESS_KEY')
-# AWS_SECRET_ACCESS_KEY =  os.environ.get('AWS_SECRET_KEY')
-# AWS_STORAGE_BUCKET_NAME = 'blogcms-bucket'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID  = os.environ.get('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY =  os.environ.get('AWS_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = 'blogcms-bucket'
