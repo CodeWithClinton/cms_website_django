@@ -16,6 +16,7 @@
         background-color: lightgray;
         color: black;
     }
+  
 </style>
 
 
@@ -54,42 +55,35 @@
         <div class = 'container' style = 'display: flex; justify-content: center'>
             {% for tag in tags %}
             <a href  = " {% url 'tag' tag.slug %} ">
-            <button type="button" class="btn btn-custom" style = 'margin-right: 10px;'>{{tag.title}}</button>
+            <button type="button" class="btn btn-custom" style = 'margin-right: 10px;'>{{tag.title}}</button></a>
             {% endfor %}
         </div>
         <br>
-        <div class="row gx-5">
-            {% for post in posts %}
-            <div class="col-lg-4 mb-5">
-                <a href = "{% url 'detail' post.slug %}" style = 'text-decoration: none'>
-                <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" style = 'width: 100%; height: 100%' src="{{post.imageUrl}}" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
-                    <div class="card-body p-4">
-                        <div class="badge bg-primary bg-gradient rounded-pill mb-2"> {{post.tag.title}} </div>
-                        <a class="text-decoration-none link-dark stretched-link" href="{% url 'detail' post.slug %}"><h5 class="card-title mb-3"><strong>{{post.title}}</strong></h5></a>
-                        <p class="card-text mb-0">{{post.body|safe|truncatechars:'150'}}</p>
-                    </div>
-                    <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                        <div class="d-flex align-items-end justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-3" src = "{{post.writer.pictureUrl}} " alt="..." style = " width: 20%; height: 20%"  />
-                                <div class="big">
-                                    <div class="fw-bold">{{post.writer.name}}</div>
-                                    <!-- <div class="text-muted">{{post.created}} &middot; 6 min read</div> -->
-                                    <div class="text-muted">{{post.created}} &middot; 6 min read</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+        <div class="row justify-content-center">
+         
+            <div class="card-group">
+                {% for post in posts %}
+                <div class = 'col-12 col-sm-12 col-md-6 col-lg-4'>
+                <div class="card" style = "margin-right: 20px">
+                <a href = "{% url 'detail' post.slug %}" style="color: black; text-decoration: none">
+                  <img src="{{post.imageUrl}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <small class="text-muted">{{post.tag.title}}</small>
+                    <h5 class="card-title"><strong>{{post.title}}</strong></h5>
+                    <p class="card-text">{{post.body|safe|truncatechars:'150'}}</p>
+                    {% comment %} <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> {% endcomment %}
+                  </div>
+                
                 </div>
-            </div>
-            {% endfor %}
-           
+            </a>
+        </div>
+            
+               {% endfor %}
+               
+              </div>
 
-
-            <nav aria-label="Page navigation example" style = 'align-self: center'>
-                <ul class="pagination" style = 'justify-content:center'>
+            <nav aria-label="Page navigation example" style = 'align-self: center' style="margin-top: 100px">
+                <ul class="pagination" style = 'justify-content:center;margin-top: 50px'>
 
                     {% if posts.has_previous %}
                   <li class="page-item">
@@ -128,23 +122,9 @@
                 </ul>
               </nav>
             
-        <!-- Call to action-->
-        <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
-            <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
-                <div class="mb-4 mb-xl-0">
-                    <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
-                    <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
-                </div>
-                <div class="ms-xl-4">
-                    <div class="input-group mb-2">
-                        <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
-                        <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
-                    </div>
-                    <div class="small text-white-50">We care about privacy, and will never share your data.</div>
-                </div>
-            </div>
-        </aside>
-    </div>
+        
+
+    </div> 
 </section>
 
 {% endblock %}

@@ -69,10 +69,10 @@
            
             <div class = 'row'>
                 {% for post in account.post_set.all %}
-                <div class = 'col-sm-12 col-md-4'>
+                <div class = 'col-12 col-sm-12 col-md-4 col-lg-4'>
                     
 
-                    <div class="card" style="width: 15rem;">
+                    <div class="card" style="">
                         <img src="{{post.imageUrl}}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title"><strong>{{post.title}}</strong></h5>
