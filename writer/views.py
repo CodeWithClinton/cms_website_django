@@ -3,6 +3,7 @@ from .models import Profile
 from .forms import RegistrationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .forms import EditProfileForm
 # Create your views here.
 def profile(request, pk):
@@ -42,6 +43,7 @@ def signout(request):
     logout(request)
     return redirect('signin')
 
+@login_required(login_url=login)
 def updateProfile(request):
     profile = request.user.profile
     form = EditProfileForm(instance=profile)

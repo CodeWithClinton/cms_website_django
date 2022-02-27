@@ -88,7 +88,8 @@ DATABASES = {
         'NAME': 'blogCms',
         'USER': 'postgres',
         'PASSWORD': 'database',
-        'HOST':  os.environ.get('CMS_HOST'),
+        'HOST':  'database-1.ce7yb1guuyaz.us-east-2.rds.amazonaws.com',
+        # 'HOST':  os.environ.get('CMS_HOST'),
         'PORT': '5432'
     }
 }
