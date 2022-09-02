@@ -85,11 +85,10 @@ WSGI_APPLICATION = 'medium.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blogCms',
-        'USER': 'postgres',
-        'PASSWORD': 'database',
-        'HOST':  'database-1.ce7yb1guuyaz.us-east-2.rds.amazonaws.com',
-        # 'HOST':  os.environ.get('CMS_HOST'),
+        'NAME': 'freelance',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST':  os.environ.get('F_DB_HOST'),
         'PORT': '5432'
     }
 }
@@ -143,9 +142,9 @@ IMAGE_ROOT = BASE_DIR/'static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ.get('S_AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = os.environ.get('S_AWS_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = 'clintonmatics-bucket'
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID  = os.environ.get('AWS_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY =  os.environ.get('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = 'blogcms-bucket'

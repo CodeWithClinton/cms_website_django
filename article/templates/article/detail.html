@@ -124,12 +124,12 @@
                 <img src=" {{post.imageUrl}} " class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"> <strong>{{post.title}}</strong> </h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-primary">Check Post</a>
+                  <p class="card-text">{{post.body | truncatechars:"30" | safe }}</p>
+                  {% comment %} <a href="#" class="btn btn-primary">Check Post</a> {% endcomment %}
                 </div>
               </div>
             </a>
-              <br> " " <br>
+              <br> <br>
               {% endfor %}
               
 
