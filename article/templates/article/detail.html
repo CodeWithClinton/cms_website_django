@@ -12,12 +12,31 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         
     }
+
+    .recent{
+        width: auto;
+        height: auto;
+    }
+
+    .recentlist{
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    #card{
+        margin-bottom: 20px !important;
+    }
+
 </style>
 
   <!-- Page content-->
   <div class="container mt-5">
     <div class="row "> 
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <!-- Post content-->
             <article>
                 <!-- Post header-->
@@ -80,22 +99,7 @@
                             <div class="ms-3">
                                 <div class="fw-bold">{{request.user.profile.name}}</div>
                                 {{comment.body}}
-                                <!-- Child comment 1-->
-                                <!-- <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                    </div>
-                                </div> -->
-                                <!-- Child comment 2-->
-                                <!-- <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When you put money directly to a problem, it makes a good headline.
-                                    </div>
-                                </div> -->
+                            
                             </div>
                             
                         </div>
@@ -113,38 +117,48 @@
             </section>
         </div>
         
-        <div class = 'col-4'>
-            
-            <h1>Recent Posts</h1>
-            
-        
-            {% for post in posts %}
-            <a href = "{% url 'detail' post.slug %}" style = 'text-decoration: none; color: black'>
-            <div class="card" style="width: 15rem;" style = 'margin-bottom: 20px'>
-                <img src=" {{post.imageUrl}} " class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title"> <strong>{{post.title}}</strong> </h5>
-                  <p class="card-text">{{post.body | truncatechars:"30" | safe }}</p>
-                  {% comment %} <a href="#" class="btn btn-primary">Check Post</a> {% endcomment %}
-                </div>
-              </div>
-            </a>
-              <br> <br>
-              {% endfor %}
-              
-
-
-
-
-        </div>
-
-
-            
-        <!-- </div> -->
+      
 
 
        
     </div>
+
+    <div class="row" style="flex-wrap:wrap" style="border: 2px solid black">
+
+        <div class="recent">
+            <h3>Recent Posts</h3>
+            <div class="recentlist">
+
+                {% for post in posts %}
+
+            
+        
+                <a href = "{% url 'detail' post.slug %}" style = 'text-decoration: none; color: black'>
+                <div class="card" style="width: 15rem;" id="card">
+                    <img src=" {{post.imageUrl}} " class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title"> <strong>{{post.title}}</strong> </h5>
+                      <p class="card-text">{{post.body | truncatechars:"100" | safe }}</p>
+                      
+                    </div>
+                  </div>
+                </a>
+                
+                  <br>
+                  
+    
+    
+            {% endfor %}
+
+            </div>
+        </div>
+        
+       
+
+
+    </div>
+
+
 </div>
 <script>
     let textarea = document.getElementsByTagName('textarea')

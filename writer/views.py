@@ -28,6 +28,10 @@ def registration(request):
     return render(request, 'writer/registration.html', context)
 
 def signin(request):
+    
+    if request.user.is_authenticated:
+        return redirect("account")
+    
     if request.method=='POST':
         username = request.POST['username']
         password = request.POST['password']
